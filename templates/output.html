@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Placement Prediction Result</h1>
+        </header>
+
+        <main>
+            <div class="result-container">
+                <h2>Your Result is</h2>
+
+                <div class="output">
+                    <p>{{ output }}</p>
+                    <p>{{ output2 }}</p>
+                </div>
+
+                <!-- Recommendation Button -->
+                <form action="/recommend" method="post">
+                    <button class="recommend-btn" type="submit">
+                        Get Career Recommendations
+                    </button>
+                </form>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

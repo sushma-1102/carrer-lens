@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Lens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recommend.css') }}">
+    <style>
+        .history-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background-color: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .history-btn:hover {
+            background-color: #1abc9c;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🚀 Career Lens</h1>
+
+    <!-- Top Right History Button -->
+    <div class="top-bar">
+        <a href="/history" class="history-btn">📊 View Recent History</a>
+    </div>
+
+    <form method="POST" action="/recommend">
+
+        <!-- Branch -->
+        <div class="form-group">
+            <label>Branch</label>
+            <select name="branch" required>
+                <option value="CSE">CSE</option>
+                <option value="CSE-AIML">CSE-AIML</option>
+                <option value="CSE-DS">CSE-DS</option>
+                <option value="CSE-IT">CSE-IT</option>
+                <option value="CIVIL">CIVIL</option>
+                <option value="CHEMICAL ENGINEERING">CHEMICAL ENGINEERING</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="MECH">MECH</option>
+                <option value="MRB">MRB</option>
+            </select>
+        </div>
+
+        <!-- Career -->
+        <div class="form-group">
+            <label>Career Preference</label>
+            <select name="career" id="career" onchange="toggleCompanyType()" required>
+                <option value="Software">Software</option>
+                <option value="Core">Core</option>
+                <option value="HigherStudies">Higher Studies</option>
+            </select>
+        </div>
+
+        <!-- Company Type -->
+        <div class="form-group" id="companyTypeDiv">
+            <label>If Software, Company Type</label>
+            <select name="company_type">
+                <option value="Product">Product Based</option>
+                <option value="Service">Service Based</option>
+            </select>
+        </div>
+
+        <button type="submit" class="generate-btn">
+            Generate Recommendation
+        </button>
+
+    </form>
+
+    {% if recommendations %}
+    <div class="result-box">
+        <h2>Recommended Skills & Preparation Plan</h2>
+        <ul>
+            {% for skill in recommendations %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+function toggleCompanyType() {
+    var career = document.getElementById("career").value;
+    var companyDiv = document.getElementById("companyTypeDiv");
+
+    if (career === "Software") {
+        companyDiv.style.display = "block";
+    } else {
+        companyDiv.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
